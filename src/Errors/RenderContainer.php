@@ -17,6 +17,9 @@
  */
 
 use \Closure;
+use Neomerx\JsonApi\Contracts\Codec\CodecContainerInterface;
+use Neomerx\JsonApi\Encoder\Encoder;
+use Neomerx\JsonApi\Parameters\MediaType;
 use \Symfony\Component\HttpFoundation\Response;
 use \Symfony\Component\HttpKernel\Exception\HttpException;
 use \Symfony\Component\HttpKernel\Exception\GoneHttpException;
@@ -67,5 +70,20 @@ class RenderContainer extends BaseRenderContainer
             PreconditionRequiredHttpException::class    => Response::HTTP_PRECONDITION_REQUIRED,
             UnsupportedMediaTypeHttpException::class    => Response::HTTP_UNSUPPORTED_MEDIA_TYPE,
         ]);
+    }
+
+    private function getJsonApiErrorRender()
+    {
+        return function (JsonApiException $exception, $statusCode) {
+            $content   = Encoder::instance([])->error($exception->getError());
+            $mediaType = new MediaType(CodecContainerInterface::JSON_API_TYPE);
+
+            return (new Responses($this->integration))->getResponse(
+                $statusCode,
+                $mediaType,
+                $content,
+                $supportedExtensions
+            );
+        };
     }
 }
