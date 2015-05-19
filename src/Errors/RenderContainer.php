@@ -77,4 +77,12 @@ class RenderContainer extends BaseRenderContainer
             JsonApiException::class                     => Response::HTTP_BAD_REQUEST,
         ]);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getErrorsRender($statusCode)
+    {
+        return parent::getErrorsRender($statusCode);
+    }
 }
