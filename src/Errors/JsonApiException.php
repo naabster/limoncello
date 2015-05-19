@@ -41,6 +41,8 @@ class JsonApiException extends RuntimeException
      * @param string[]|null   $paths
      * @param array|null      $members Array of additional members in [memberName => memberValue, ...] format
      * @param Exception       $previous
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         $idx = null,
@@ -54,8 +56,7 @@ class JsonApiException extends RuntimeException
         array $members = null,
         Exception $previous = null
     ) {
-        $code = 0;
-        parent::__construct($title, $code, $previous);
+        parent::__construct($title, 0, $previous);
         $this->error = new Error($idx, $href, $status, $code, $title, $detail, $links, $paths, $members);
     }
 
