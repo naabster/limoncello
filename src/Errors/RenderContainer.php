@@ -45,7 +45,7 @@ class RenderContainer extends BaseRenderContainer
 {
     /**
      * @param NativeResponsesInterface $responses
-     * @param callable                 $extensionsClosure
+     * @param Closure                  $extensionsClosure
      * @param int                      $defaultStatusCode
      */
     public function __construct(

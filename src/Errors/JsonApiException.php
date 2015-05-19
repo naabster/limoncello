@@ -40,7 +40,7 @@ class JsonApiException extends RuntimeException
      * @param string[]|null   $links
      * @param string[]|null   $paths
      * @param array|null      $members Array of additional members in [memberName => memberValue, ...] format
-     * @param Exception       $previous
+     * @param Exception|null  $previous
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
